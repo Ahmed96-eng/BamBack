@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
+import 'package:sizer/sizer.dart';
 
 String? userId;
 String? lang;
@@ -36,7 +38,7 @@ showFlutterToast({
         timeInSecForIosWeb: 1,
         backgroundColor: backgroundColor,
         textColor: Colors.white,
-        fontSize: 16.0);
+        fontSize: 9.0.sp);
 
 showAlertDailog(
         {BuildContext? context,
@@ -52,38 +54,54 @@ showAlertDailog(
         // decoration: BoxDecoration(
         //   gradient: maingradient(),
         // ),
+
         child: AlertDialog(
+          // contentPadding: EdgeInsets.all(20),
+          // insetPadding: EdgeInsets.all(20),
           backgroundColor: mainColorOpacity,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: new Text(
-            titlle!,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
+          title: TextWidget(
+            text: titlle!, fontWeight: FontWeight.bold,
+            // style: TextStyle(
+            //     fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20),
           ),
-          content: new Text(
-            message!,
-            style: TextStyle(
-                fontWeight: FontWeight.bold, color: Colors.white, fontSize: 18),
+          content: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+            child: TextWidget(
+              text: message!,
+              fontWeight: FontWeight.bold,
+              isSmallText: true,
+            ),
           ),
           actions: <Widget>[
             // ignore: deprecated_member_use
             FlatButton(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
               shape: StadiumBorder(),
               color: Colors.white,
               child: Text(
                 labelYes!,
-                style: TextStyle(color: Colors.red, fontSize: 16),
+                style: TextStyle(
+                    color: Colors.red,
+                    fontSize: SizerUtil.deviceType == DeviceType.mobile
+                        ? 10.sp
+                        : 8.sp),
               ),
               onPressed: onPressYes,
             ),
             // ignore: deprecated_member_use
             FlatButton(
+              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.h),
               shape: StadiumBorder(),
               color: Colors.white,
               child: Text(
                 labelNo!,
-                style: TextStyle(color: Colors.black54, fontSize: 16),
+                style: TextStyle(
+                    color: Colors.black54,
+                    fontSize: SizerUtil.deviceType == DeviceType.mobile
+                        ? 10.sp
+                        : 8.sp),
               ),
               onPressed: onPressNo,
             ),

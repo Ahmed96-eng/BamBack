@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:qattan/constant.dart';
 import 'package:qattan/model/category_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:qattan/veiw/component_widget/style.dart';
+
+import '../text_widget.dart';
 
 class CategoryItem extends StatelessWidget {
   CategoryItem({
@@ -61,11 +64,17 @@ class CategoryItem extends StatelessWidget {
             SizedBox(
               width: width * 0.1,
             ),
-            Text(
-              categoryData.title ?? "",
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style: fourthLineStyle,
+            // Text(
+            //   categoryData.title ?? "",
+            //   maxLines: 2,
+            //   textAlign: TextAlign.center,
+            //   style: fourthLineStyle,
+            // ),
+            TextWidget(
+              text: categoryData.title ?? "",
+              isLargeText: true,
+              color: mainColor!,
+              textOverflow: TextOverflow.ellipsis,
             ),
             if (showItemCount) ...[
               SizedBox(

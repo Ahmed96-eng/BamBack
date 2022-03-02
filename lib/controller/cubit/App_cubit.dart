@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
-
+import 'package:get/get.dart' as gettrans;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,6 +32,8 @@ import 'package:qattan/model/sub_category_model.dart';
 import 'package:qattan/model/sub_category_products_model.dart';
 import 'package:qattan/veiw/component_widget/common_button.dart';
 import 'package:qattan/veiw/component_widget/navigator.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
+import 'package:qattan/veiw/screens/auth/log_in.dart';
 import 'package:qattan/veiw/screens/home/home_screen.dart';
 import 'package:qattan/veiw/screens/home/logo_background.dart';
 import 'package:qattan/veiw/screens/notification/notification_screen.dart';
@@ -69,7 +71,7 @@ class AppCubit extends Cubit<AppState> {
     NotificationScreen(),
     LogoBackGround(),
     LogoBackGround(),
-    ProfilScreen(),
+    if (userId != "") ProfilScreen(),
   ];
 
   Future<bool> willPopScop(context) {
@@ -638,9 +640,10 @@ class AppCubit extends Cubit<AppState> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  Text(
-                    'Picked Image From',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  TextWidget(
+                    fontWeight: FontWeight.bold,
+                    isSmallText: true,
+                    text: 'Picked Image From',
                   ),
                   SizedBox(
                     height: height! * 0.1,

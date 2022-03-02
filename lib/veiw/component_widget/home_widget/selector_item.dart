@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:qattan/constant.dart';
+import 'package:sizer/sizer.dart';
 
 class SelectorItem extends StatelessWidget {
   final List? sizes;
@@ -55,7 +56,7 @@ class SelectorItem extends StatelessWidget {
                                   .textTheme
                                   .headline6!
                                   .copyWith(
-                                      fontSize: width! * 0.4,
+                                      fontSize: 12.sp,
                                       color: selectedSize == sizes![index]
                                           ? Colors.white
                                           : Colors.black87),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qattan/model/sub_category_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 
 class SubCategoryItem extends StatelessWidget {
   SubCategoryItem({
@@ -31,8 +32,8 @@ class SubCategoryItem extends StatelessWidget {
               // padding: EdgeInsets.all(8),
               // decoration: BoxDecoration(border: Border.all(color: Colors.white)),
               child: Container(
-                width: width * 0.2,
-                height: height * 0.25,
+                width: width * 0.15,
+                height: height * 0.2,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(width * .02),
                 ),
@@ -45,10 +46,11 @@ class SubCategoryItem extends StatelessWidget {
             // SizedBox(
             //   height: height * 0.02,
             // ),
-            Text(
-              subcategoryData!.title ?? "",
-              maxLines: 2,
-              textAlign: TextAlign.center,
+            TextWidget(
+              text: subcategoryData!.title ?? "",
+              isSmallText: true, fontWeight: FontWeight.w500,
+              // maxLines: 2,
+              // textAlign: TextAlign.center,
             ),
             // Text(
             //   subcategoryData!.noProducts!,

@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitialState());
   static AuthCubit get(context) => BlocProvider.of(context);
 
-  APIService apiService = APIService();
+  // APIService apiService = APIService();
 
   onInit() {
     // initConnectivity();

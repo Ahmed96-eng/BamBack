@@ -4,6 +4,8 @@ import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:qattan/veiw/component_widget/rating_widget.dart';
 import 'package:get/get.dart';
 
+import '../text_widget.dart';
+
 class SubCategoryProductItem extends StatelessWidget {
   SubCategoryProductItem({
     required this.width,
@@ -38,7 +40,7 @@ class SubCategoryProductItem extends StatelessWidget {
               children: [
                 Container(
                   width: width,
-                  height: index.isEven ? height * 0.95 : height * 0.5,
+                  height: index.isEven ? height * 0.7 : height * 0.5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(width * .04),
                   ),
@@ -63,7 +65,7 @@ class SubCategoryProductItem extends StatelessWidget {
             ),
             Container(
               width: width,
-              height: height * 0.35,
+              height: height * 0.25,
               margin: EdgeInsets.all(width * 0.02),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +74,20 @@ class SubCategoryProductItem extends StatelessWidget {
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  Text(productData!.productName!),
+                  // Text(productData!.productName!),
+                  TextWidget(
+                    text: productData!.productName ?? "",
+                    isSmallText: true,
+                    textOverflow: TextOverflow.ellipsis,
+                  ),
                   // SizedBox(
                   //   height: height * 0.02,
                   // ),
-                  Text('${productData!.price!}' + "sar".tr),
+
+                  TextWidget(
+                    text: '${productData!.price}' + "sar".tr,
+                    isSmallText: true,
+                  ),
                   // SizedBox(
                   //   height: height * 0.02,
                   // ),
@@ -86,7 +97,10 @@ class SubCategoryProductItem extends StatelessWidget {
                         width: width,
                         initialRating: (productData!.rate!).toDouble(),
                       ),
-                      Text('(${productData!.rate!})'),
+                      TextWidget(
+                        text: '(${productData!.rate})',
+                        isSmallText: true,
+                      ),
                     ],
                   )
                 ],

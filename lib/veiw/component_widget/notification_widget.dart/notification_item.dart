@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:qattan/model/offers_products_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 
+import '../text_widget.dart';
+
 class NotificationItem extends StatelessWidget {
   NotificationItem({
     required this.width,
@@ -71,15 +73,15 @@ class NotificationItem extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "Disc",
-                              style: TextStyle(
-                                  fontSize: 8, fontWeight: FontWeight.bold),
+                            TextWidget(
+                              fontWeight: FontWeight.w500,
+                              isSmallText: true,
+                              text: "Disc",
                             ),
-                            Text(
-                              "${offersProductData!.discount}%",
-                              style: TextStyle(
-                                  fontSize: 8, fontWeight: FontWeight.bold),
+                            TextWidget(
+                              fontWeight: FontWeight.w500,
+                              isSmallText: true,
+                              text: "${offersProductData!.discount}%",
                             ),
                           ],
                         ),
@@ -93,7 +95,10 @@ class NotificationItem extends StatelessWidget {
             SizedBox(
               width: width * 0.02,
             ),
-            Text(offersProductData!.productName!),
+            TextWidget(
+                fontWeight: FontWeight.bold,
+                isSmallText: true,
+                text: offersProductData!.productName!),
             // SizedBox(
             //   height: height * 0.02,
             // ),

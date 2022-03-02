@@ -22,6 +22,7 @@ import 'package:qattan/veiw/screens/bottom_nav_bar_layout.dart';
 import 'package:qattan/veiw/screens/no_internet_connection.dart';
 import 'package:qattan/veiw/screens/on_boarding_screen.dart';
 import 'package:qattan/veiw/screens/restart_app.dart';
+import 'package:sizer/sizer.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
 
 void main() async {
@@ -139,48 +140,51 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthCubit(),
         ),
       ],
-      child: GetMaterialApp(
-        title: 'Bamback',
-        initialBinding: Binding(),
-        debugShowCheckedModeBanner: false,
-        transitionDuration: Duration(milliseconds: 500),
-        // defaultTransition: Transition.zoom,
-        translations: TranslationApp(),
-        locale: Locale(CachedHelper.getData(key: languageKey) ?? 'ar'),
-        fallbackLocale: Locale(CachedHelper.getData(key: languageKey) ?? 'ar'),
-        theme: ThemeData(
-            primarySwatch: Colors.grey,
-            appBarTheme: AppBarTheme(
-              titleTextStyle: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18),
-              backwardsCompatibility: false,
-              color: mainColor,
-              systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: mainColor,
-                statusBarIconBrightness: Brightness.dark,
-              ),
-            )),
-        home: SplashScreenView(
-          navigateRoute: screenWidget,
-          duration: 5000,
-          imageSize: 250,
-          imageSrc: "asset/images/main_logo.png",
-          text: "Bamback",
-          textType: TextType.ColorizeAnimationText,
-          textStyle: TextStyle(
-            fontSize: 40.0,
+      child: Sizer(builder: (context, orientation, deviceType) {
+        return GetMaterialApp(
+          title: 'Bamback',
+          initialBinding: Binding(),
+          debugShowCheckedModeBanner: false,
+          transitionDuration: Duration(milliseconds: 500),
+          // defaultTransition: Transition.zoom,
+          translations: TranslationApp(),
+          locale: Locale(CachedHelper.getData(key: languageKey) ?? 'ar'),
+          fallbackLocale:
+              Locale(CachedHelper.getData(key: languageKey) ?? 'ar'),
+          theme: ThemeData(
+              primarySwatch: Colors.grey,
+              appBarTheme: AppBarTheme(
+                titleTextStyle: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+                backwardsCompatibility: false,
+                color: mainColor,
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: mainColor,
+                  statusBarIconBrightness: Brightness.dark,
+                ),
+              )),
+          home: SplashScreenView(
+            navigateRoute: screenWidget,
+            duration: 5000,
+            imageSize: 250,
+            imageSrc: "asset/images/main_logo.png",
+            text: "Bamback",
+            textType: TextType.ColorizeAnimationText,
+            textStyle: TextStyle(
+              fontSize: 40.0,
+            ),
+            colors: [
+              Colors.blueGrey,
+              Colors.blue,
+              Colors.yellow,
+              Colors.red,
+            ],
+            backgroundColor: Colors.white,
           ),
-          colors: [
-            Colors.blueGrey,
-            Colors.blue,
-            Colors.yellow,
-            Colors.red,
-          ],
-          backgroundColor: Colors.white,
-        ),
-      ),
+        );
+      }),
     );
   }
 }

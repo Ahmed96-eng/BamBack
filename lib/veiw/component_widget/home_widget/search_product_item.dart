@@ -3,6 +3,8 @@ import 'package:qattan/model/search_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:get/get.dart';
 
+import '../text_widget.dart';
+
 class SearchProductItem extends StatelessWidget {
   const SearchProductItem({
     required this.width,
@@ -35,7 +37,7 @@ class SearchProductItem extends StatelessWidget {
               children: [
                 Container(
                   width: width,
-                  height: index.isEven ? height * 0.95 : height * 0.5,
+                  height: index.isEven ? height * 0.6 : height * 0.4,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(width * .04),
                   ),
@@ -60,7 +62,7 @@ class SearchProductItem extends StatelessWidget {
             ),
             Container(
               width: width,
-              height: height * 0.35,
+              height: height * 0.3,
               margin: EdgeInsets.all(width * 0.02),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,11 +71,17 @@ class SearchProductItem extends StatelessWidget {
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  Text(searchData!.productName!),
+                  TextWidget(
+                      fontWeight: FontWeight.bold,
+                      isSmallText: true,
+                      text: searchData!.productName!),
                   SizedBox(
                     height: height * 0.02,
                   ),
-                  Text('${searchData!.price!}' + "sar".tr),
+                  TextWidget(
+                      fontWeight: FontWeight.w600,
+                      isSmallText: true,
+                      text: '${searchData!.price!}' + "sar".tr),
                   SizedBox(
                     height: height * 0.02,
                   ),

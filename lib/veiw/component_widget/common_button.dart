@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qattan/constant.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
+import 'package:sizer/sizer.dart';
 
 class CommonButton extends StatelessWidget {
   /// Is the height of container box.
@@ -49,7 +52,7 @@ class CommonButton extends StatelessWidget {
     this.alignmentXY = const [0.5, 0.5],
     this.position = 'down',
     this.containerColor,
-    this.textColor,
+    this.textColor = Colors.white,
     this.imageSource,
     required this.text,
     required this.onTap,
@@ -62,7 +65,8 @@ class CommonButton extends StatelessWidget {
       child: FittedBox(
         child: Container(
           width: width,
-          height: height,
+          height:
+              SizerUtil.deviceType == DeviceType.mobile ? height : height + 20,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: containerColor,
@@ -73,14 +77,19 @@ class CommonButton extends StatelessWidget {
             children: [
               Align(
                 alignment: FractionalOffset(alignmentXY[0], alignmentXY[1]),
-                child: Text(
-                  text!,
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(
-                      color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.bold),
+                child: TextWidget(
+                  text: text!, color: textColor!,
+                  fontWeight: FontWeight.bold,
+                  // isLargeText: true,
                 ),
+                // child: Text(
+                //   text!,
+                //   overflow: TextOverflow.fade,
+                //   style: TextStyle(
+                //       color: textColor,
+                //       fontSize: fontSize,
+                //       fontWeight: FontWeight.bold),
+                // ),
               ),
               if (imageSource != null) ...[
                 // SizedBox(width: 32),

@@ -5,15 +5,15 @@ import 'package:qattan/controller/cached_helper/cached_helper.dart';
 import 'package:qattan/controller/cached_helper/key_constant.dart';
 import 'package:qattan/controller/cubit/Auth_cubit.dart';
 import 'package:qattan/controller/cubit_states/Auth_state.dart';
-import 'package:qattan/features/responsive_setup/responsive_builder.dart';
 import 'package:qattan/veiw/component_widget/common_button.dart';
 import 'package:qattan/veiw/component_widget/navigator.dart';
-import 'package:qattan/veiw/component_widget/style.dart';
 import 'package:qattan/veiw/component_widget/text_form_field_widget.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 import 'package:qattan/veiw/screens/auth/enter_phone.dart';
 import 'package:qattan/veiw/screens/auth/sign_up.dart';
 import 'package:get/get.dart';
 import 'package:qattan/veiw/screens/bottom_nav_bar_layout.dart';
+import 'package:sizer/sizer.dart';
 
 class LogIn extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
@@ -33,161 +33,186 @@ class LogIn extends StatelessWidget {
           showFlutterToast(message: 'login_error'.tr);
         }
       },
-      builder: (context, state) =>
-          ResponsiveBuilder(builder: (context, sizeConfig) {
-        final height = sizeConfig.screenHeight!;
-        final width = sizeConfig.screenWidth!;
-        return Scaffold(
-          // resizeToAvoidBottomInset: false,
-          body: Container(
-            width: width,
-            height: height,
-            child: Form(
-              key: formKey,
-              child: ListView(
-                children: [
-                  Container(
-                    height: height * 0.38,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: mainColor,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(35),
-                        bottomRight: Radius.circular(35),
-                      ),
+      builder: (context, state) => Scaffold(
+        // resizeToAvoidBottomInset: false,
+        body: Container(
+          width: 100.w,
+          height: 100.h,
+          child: Form(
+            key: formKey,
+            child: ListView(
+              children: [
+                Container(
+                  height: 38.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15.w),
+                      bottomRight: Radius.circular(15.w),
                     ),
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: ListView(
-                        physics: NeverScrollableScrollPhysics(),
-                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: height * 0.02,
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.topEnd,
-                            child: CommonButton(
-                                text: "sign_up".tr,
-                                textColor: Colors.white,
-                                width: width * 0.25,
-                                onTap: () {
-                                  print('Tapped');
-                                  goTo(context, SignUp());
-                                }),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional.center,
-                            child: Container(
-                              width: width * 0.4,
-                              height: height * 0.15,
-                              child: Image(
-                                image: AssetImage('asset/images/main_logo.png'),
-                              ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(5.w),
+                    child: ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.topEnd,
+                          child: CommonButton(
+                              text: "sign_up".tr,
+                              textColor: Colors.white,
+                              width: 30.w,
+                              onTap: () {
+                                print('Tapped');
+                                goTo(context, SignUp());
+                              }),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional.center,
+                          child: Container(
+                            width: 40.w,
+                            height: 15.h,
+                            child: Image(
+                              image: AssetImage('asset/images/main_logo.png'),
                             ),
                           ),
+                        ),
 
-                          Text(
-                            "sign_in".tr,
-                            style: firstLineStyle,
-                          ),
-                          SizedBox(
-                            height: height * 0.01,
-                          ),
-                          // Text(
-                          //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Integer maximus accumsan erat id facilisis."),
-                          // SizedBox(
-                          //   height: height * 0.02,
-                          // ),
-                        ],
+                        TextWidget(
+                          text: "sign_in".tr,
+                          fontWeight: FontWeight.bold,
+                          color: buttonTextColor!,
+                          // isSmallText: true,
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        // Text(
+                        //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Integer maximus accumsan erat id facilisis."),
+                        // SizedBox(
+                        //   height: height * 0.02,
+                        // ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                TextFormFieldWidget(
+                  hint: 'name_hint'.tr,
+                  controller: userNameController,
+                  keyboardType: TextInputType.text,
+                  valdiator: (value) {
+                    if (value!.isEmpty) {
+                      return "enter_this_field_please!".tr;
+                    }
+
+                    return null;
+                  },
+                ),
+                TextFormFieldWidget(
+                  hint: "password_hint".tr,
+                  controller: passwordController,
+                  keyboardType: TextInputType.text,
+                  textInputAction: TextInputAction.done,
+                  iconData: AuthCubit.get(context).showPassword
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  onTap: () =>
+                      AuthCubit.get(context).changeshowPassword(context),
+                  obscurePassword: AuthCubit.get(context).showPassword,
+                  valdiator: (value) {
+                    if (value!.isEmpty) {
+                      return "enter_this_field_please!".tr;
+                    } else if (value.length < 6) {
+                      return "enter_the_correct_password_please!".tr;
+                    }
+
+                    return null;
+                  },
+                ),
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: InkWell(
+                    child: Padding(
+                      padding: EdgeInsets.all(5.w),
+                      child: TextWidget(
+                        text: "forgot_password".tr,
+                        color: Color(0xffE41A4A),
+                        fontWeight: FontWeight.bold,
+                        isSmallText: true,
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: height * 0.03,
-                  ),
-                  TextFormFieldWidget(
-                    hint: 'name_hint'.tr,
-                    controller: userNameController,
-                    keyboardType: TextInputType.text,
-                    valdiator: (value) {
-                      if (value!.isEmpty) {
-                        return "enter_this_field_please!".tr;
-                      }
-
-                      return null;
+                    onTap: () {
+                      goTo(context, EnterPhone());
                     },
                   ),
-                  TextFormFieldWidget(
-                    hint: "password_hint".tr,
-                    controller: passwordController,
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.done,
-                    iconData: AuthCubit.get(context).showPassword
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    onTap: () =>
-                        AuthCubit.get(context).changeshowPassword(context),
-                    obscurePassword: AuthCubit.get(context).showPassword,
-                    valdiator: (value) {
-                      if (value!.isEmpty) {
-                        return "enter_this_field_please!".tr;
-                      } else if (value.length < 6) {
-                        return "enter_the_correct_password_please!".tr;
+                  // child: CommonButton(
+                  //   text: "forgot_password".tr,
+                  //   width: 40.w,
+                  //   textColor: Color(0xffE41A4A),
+                  // onTap: () {
+                  //   goTo(context, EnterPhone());
+                  // },
+                  // ),
+                ),
+                Center(
+                  child: CommonButton(
+                    text: "sign_in".tr,
+                    width: 85.w,
+                    containerColor: buttonColor,
+                    textColor: buttonTextColor,
+                    onTap: () async {
+                      print(userNameController.text);
+                      print(passwordController.text);
+                      if (!formKey.currentState!.validate()) {
+                        return;
+                      } else {
+                        AuthCubit.get(context)
+                            .logIn(
+                          username: userNameController.text,
+                          password: passwordController.text,
+                        )
+                            .then((value) {
+                          // CachedHelper.getData(key: loginTokenId);
+                          // AuthCubit.get(context).getCachesData(loginTokenId);
+                          // AuthCubit.get(context).refresh();
+                        });
                       }
 
-                      return null;
+                      // goTo(context, BotomNavBarLayout());
                     },
                   ),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: CommonButton(
-                      text: "forgot_password".tr,
-                      width: width * 0.4,
-                      textColor: Color(0xffE41A4A),
-                      onTap: () {
-                        goTo(context, EnterPhone());
-                      },
-                    ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Center(
+                  child: CommonButton(
+                    text: "guest".tr,
+                    width: 85.w,
+                    containerColor: buttonColor,
+                    textColor: buttonTextColor,
+                    onTap: () {
+                      goTo(context, BotomNavBarLayout());
+                    },
                   ),
-                  Center(
-                    child: CommonButton(
-                      text: "sign_in".tr,
-                      width: width * 0.85,
-                      containerColor: buttonColor,
-                      textColor: buttonTextColor,
-                      onTap: () async {
-                        print(userNameController.text);
-                        print(passwordController.text);
-                        if (!formKey.currentState!.validate()) {
-                          return;
-                        } else {
-                          AuthCubit.get(context)
-                              .logIn(
-                            username: userNameController.text,
-                            password: passwordController.text,
-                          )
-                              .then((value) {
-                            // CachedHelper.getData(key: loginTokenId);
-                            // AuthCubit.get(context).getCachesData(loginTokenId);
-                            // AuthCubit.get(context).refresh();
-                          });
-                        }
-
-                        // goTo(context, BotomNavBarLayout());
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 2.h,
+                ),
+              ],
             ),
           ),
-        );
-      }),
+        ),
+      ),
     );
   }
 }

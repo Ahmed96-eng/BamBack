@@ -4,6 +4,8 @@ import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:qattan/veiw/component_widget/rating_widget.dart';
 import 'package:get/get.dart';
 
+import '../text_widget.dart';
+
 class CategoryProductItem extends StatelessWidget {
   CategoryProductItem({
     required this.width,
@@ -34,12 +36,13 @@ class CategoryProductItem extends StatelessWidget {
           // mainAxisAlignment: ,
           children: [
             Stack(
-              alignment: AlignmentDirectional.bottomEnd,
+              alignment: AlignmentDirectional.center,
               children: [
                 Container(
                   width: width,
-                  height: index.isEven ? height * 0.95 : height * 0.5,
+                  height: index.isEven ? height * 0.55 : height * 0.35,
                   decoration: BoxDecoration(
+                    // color: Colors.black,
                     borderRadius: BorderRadius.circular(width * .04),
                   ),
                   child: CachedNetworkImageWidget(
@@ -63,7 +66,7 @@ class CategoryProductItem extends StatelessWidget {
             ),
             Container(
               width: width,
-              height: height * 0.35,
+              height: height * 0.25,
               margin: EdgeInsets.all(width * 0.02),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,11 +75,20 @@ class CategoryProductItem extends StatelessWidget {
                   SizedBox(
                     height: height * 0.01,
                   ),
-                  Text(categoryProductsData!.productName!),
+                  // Text(categoryProductsData!.productName!),
+                  TextWidget(
+                    text: categoryProductsData!.productName ?? "",
+                    isSmallText: true,
+                    textOverflow: TextOverflow.ellipsis,
+                  ),
                   // SizedBox(
                   //   height: height * 0.02,
                   // ),
-                  Text('${categoryProductsData!.price!}' + "sar".tr),
+                  // Text('${categoryProductsData!.price!}' + "sar".tr),
+                  TextWidget(
+                    text: '${categoryProductsData!.price}' + "sar".tr,
+                    isSmallText: true,
+                  ),
                   // SizedBox(
                   //   height: height * 0.02,
                   // ),
@@ -86,15 +98,20 @@ class CategoryProductItem extends StatelessWidget {
                         width: width,
                         initialRating: (categoryProductsData!.rate!).toDouble(),
                       ),
-                      Text('(${categoryProductsData!.rate!})'),
+                      // Text('(${categoryProductsData!.rate!})'),
+                      TextWidget(
+                        text: '(${categoryProductsData!.rate})',
+                        isSmallText: true,
+                      ),
                     ],
                   )
                 ],
               ),
             ),
-            SizedBox(
-              height: width * 0.01,
-            ),
+            // SizedBox(
+            //   height: width * 0.01,
+            // ),
+            // Divider()
           ],
         ),
       ),

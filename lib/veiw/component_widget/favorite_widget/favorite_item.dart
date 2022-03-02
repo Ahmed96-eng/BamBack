@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qattan/model/favorite_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:get/get.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 
 class FavoriteItem extends StatelessWidget {
   const FavoriteItem({
@@ -52,11 +53,19 @@ class FavoriteItem extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(favoriteModel.prodTitle!),
+                      TextWidget(
+                        text: favoriteModel.prodTitle!,
+                        fontWeight: FontWeight.bold,
+                        isSmallText: true,
+                      ),
                       SizedBox(
                         height: height * 0.02,
                       ),
-                      Text("${favoriteModel.prodPrice!}" + "sar".tr),
+                      TextWidget(
+                        text: "${favoriteModel.prodPrice!}" + "sar".tr,
+                        fontWeight: FontWeight.w600,
+                        isSmallText: true,
+                      ),
                       // SizedBox(
                       //   height: height * 0.02,
                       // ),

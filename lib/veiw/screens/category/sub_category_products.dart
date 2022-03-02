@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:qattan/controller/cubit/App_cubit.dart';
 import 'package:qattan/controller/cubit_states/app_states.dart';
-import 'package:qattan/features/responsive_setup/responsive_builder.dart';
 import 'package:qattan/veiw/component_widget/app_bar_widget.dart';
 import 'package:qattan/veiw/component_widget/category/sub_category_product_item.dart';
 import 'package:qattan/veiw/component_widget/loading_progress_indecator.dart';
 import 'package:qattan/veiw/component_widget/navigator.dart';
 import 'package:qattan/veiw/component_widget/no_data_widget.dart';
 import 'package:qattan/veiw/screens/home/product_details.dart';
+import 'package:sizer/sizer.dart';
 
 class SubCategoryProducts extends StatelessWidget {
   final String? title;
@@ -19,18 +19,15 @@ class SubCategoryProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AppCubit, AppState>(
       listener: (context, state) {},
-      builder: (context, state) =>
-          SafeArea(child: ResponsiveBuilder(builder: (context, sizeConfig) {
-        final height = sizeConfig.screenHeight!;
-        final width = sizeConfig.screenWidth!;
-        return AppCubit.get(context).subCategoryProductsModel!.data == null
+      builder: (context, state) => SafeArea(
+        child: AppCubit.get(context).subCategoryProductsModel!.data == null
             ? LoadingProgressIndecator()
             : Scaffold(
                 appBar: PreferredSize(
-                    preferredSize: Size.fromHeight(height * 0.1),
+                    preferredSize: Size.fromHeight(8.h),
                     child: AppBarWidgets(
                       title: title!,
-                      width: width,
+                      width: 100.w,
                     )),
                 // appBar: AppBar(
                 //   elevation: 0,
@@ -69,75 +66,70 @@ class SubCategoryProducts extends StatelessWidget {
                 //   ],
                 // ),
 
-                body: ResponsiveBuilder(builder: (context, sizeConfig) {
-                  final height = sizeConfig.screenHeight!;
-                  final width = sizeConfig.screenWidth!;
-                  return AppCubit.get(context)
-                              .subCategoryProductsModel!
-                              .data!
-                              .length ==
-                          0
-                      ? Align(
-                          alignment: AlignmentDirectional.center,
-                          child: Container(
-                            height: height * 0.5,
-                            child: NoDataWidget(
-                              width: width * 1.5,
-                              height: height * 0.5,
+                body: AppCubit.get(context)
+                            .subCategoryProductsModel!
+                            .data!
+                            .length ==
+                        0
+                    ? Align(
+                        alignment: AlignmentDirectional.center,
+                        child: Container(
+                          height: 50.h,
+                          child: NoDataWidget(
+                            width: 150.w,
+                            height: 50.h,
+                          ),
+                        ),
+                      )
+                    : Container(
+                        margin: EdgeInsets.all(2.w),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 2.h,
                             ),
-                          ),
-                        )
-                      : Container(
-                          margin: EdgeInsets.all(width * 0.02),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: height * 0.02,
-                              ),
-                              Expanded(
-                                child: StaggeredGridView.countBuilder(
-                                  crossAxisCount: 4,
-                                  itemCount: AppCubit.get(context)
+                            Expanded(
+                              child: StaggeredGridView.countBuilder(
+                                crossAxisCount: 4,
+                                itemCount: AppCubit.get(context)
+                                    .subCategoryProductsModel!
+                                    .data!
+                                    .length,
+                                itemBuilder:
+                                    (BuildContext context, int index) =>
+                                        SubCategoryProductItem(
+                                  width: 50.w,
+                                  height: 30.h,
+                                  index: index,
+                                  productData: AppCubit.get(context)
                                       .subCategoryProductsModel!
-                                      .data!
-                                      .length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) =>
-                                          SubCategoryProductItem(
-                                    width: width / 2,
-                                    height: height * 0.3,
-                                    index: index,
-                                    productData: AppCubit.get(context)
-                                        .subCategoryProductsModel!
-                                        .data![index],
-                                    onTap: () {
-                                      AppCubit.get(context)
-                                          .getHomeProductDetails(
-                                            AppCubit.get(context)
-                                                .subCategoryProductsModel!
-                                                .data![index]
-                                                .id
-                                                .toString(),
-                                          )
-                                          .then((value) =>
-                                              goTo(context, ProductDetails()));
+                                      .data![index],
+                                  onTap: () {
+                                    AppCubit.get(context)
+                                        .getHomeProductDetails(
+                                          AppCubit.get(context)
+                                              .subCategoryProductsModel!
+                                              .data![index]
+                                              .id
+                                              .toString(),
+                                        )
+                                        .then((value) =>
+                                            goTo(context, ProductDetails()));
 
-                                      // goTo(context, ProductDetails());
-                                    },
-                                  ),
-                                  staggeredTileBuilder: (int index) =>
-                                      new StaggeredTile.count(
-                                          2, index.isEven ? 3 : 2),
-                                  mainAxisSpacing: height * 0.02,
-                                  crossAxisSpacing: width * 0.01,
+                                    // goTo(context, ProductDetails());
+                                  },
                                 ),
+                                staggeredTileBuilder: (int index) =>
+                                    new StaggeredTile.count(
+                                        2, index.isEven ? 3 : 2),
+                                mainAxisSpacing: 2.h,
+                                crossAxisSpacing: 1.w,
                               ),
-                            ],
-                          ),
-                        );
-                }),
-              );
-      })),
+                            ),
+                          ],
+                        ),
+                      )),
+      ),
     );
   }
 }

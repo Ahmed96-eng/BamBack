@@ -6,6 +6,7 @@ import 'package:qattan/veiw/component_widget/common_button.dart';
 import 'package:get/get.dart';
 import 'package:qattan/veiw/component_widget/navigator.dart';
 import 'package:qattan/veiw/component_widget/style.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 import 'package:qattan/veiw/screens/auth/log_in.dart';
 import 'package:qattan/veiw/screens/bottom_nav_bar_layout.dart';
 import 'package:qattan/veiw/screens/restart_app.dart';
@@ -21,9 +22,9 @@ class NoInternetConnection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "No_internet_connection".tr,
-              style: secondLineStyle,
+            TextWidget(
+              fontWeight: FontWeight.bold,
+              text: "No_internet_connection".tr,
             ),
             CommonButton(
                 text: 'check_connection'.tr,

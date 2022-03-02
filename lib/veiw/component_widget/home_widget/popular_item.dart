@@ -3,6 +3,11 @@ import 'package:qattan/model/popular_product_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
 import 'package:qattan/veiw/component_widget/rating_widget.dart';
 import 'package:get/get.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
+import 'package:qattan/veiw/screens/auth/log_in.dart';
+
+import '../../../constant.dart';
+import '../navigator.dart';
 
 class PopularItem extends StatelessWidget {
   PopularItem({
@@ -56,7 +61,20 @@ class PopularItem extends StatelessWidget {
                   child: CircleAvatar(
                     radius: width * 0.09,
                     child: IconButton(
-                      onPressed: favoritePressed,
+                      onPressed: (userId == null)
+                          ? () => showAlertDailog(
+                              context: context,
+                              titlle: "".tr,
+                              message: "please_sign_in".tr,
+                              labelNo: "no".tr,
+                              labelYes: "sign_in".tr,
+                              onPressNo: () {
+                                back(context);
+                              },
+                              onPressYes: () {
+                                goTo(context, LogIn());
+                              })
+                          : favoritePressed,
                       icon: Icon(
                         Icons.favorite_border,
                         size: width * 0.08,
@@ -76,15 +94,18 @@ class PopularItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    homeData!.productName ?? "",
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
+                  TextWidget(
+                    text: homeData!.productName ?? "",
+                    isSmallText: true,
+                    textOverflow: TextOverflow.ellipsis,
                   ),
                   // SizedBox(
                   //   height: height * 0.005,
                   // ),
-                  Text('${homeData!.price}' + "sar".tr),
+                  TextWidget(
+                    text: '${homeData!.price}' + "sar".tr,
+                    isSmallText: true,
+                  ),
                   SizedBox(
                     height: height * 0.005,
                   ),
@@ -94,7 +115,10 @@ class PopularItem extends StatelessWidget {
                         width: width,
                         initialRating: (homeData!.rate!).toDouble(),
                       ),
-                      Text('(${homeData!.rate!})'),
+                      TextWidget(
+                        text: '(${homeData!.rate!})',
+                        isSmallText: true,
+                      ),
                     ],
                   )
                 ],

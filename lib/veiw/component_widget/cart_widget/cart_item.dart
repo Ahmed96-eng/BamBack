@@ -5,7 +5,9 @@ import 'package:qattan/controller/cached_helper/cached_helper.dart';
 import 'package:qattan/controller/cached_helper/key_constant.dart';
 import 'package:qattan/model/cart_model.dart';
 import 'package:qattan/veiw/component_widget/cached_network_Image_widget.dart';
-import 'package:qattan/veiw/component_widget/home_widget/selector_item.dart';
+import 'package:sizer/sizer.dart';
+
+import '../text_widget.dart';
 
 class CartItem extends StatelessWidget {
   CartItem({
@@ -42,7 +44,7 @@ class CartItem extends StatelessWidget {
                     border: Border.all(),
                     borderRadius: BorderRadius.circular(width * .02)),
                 width: width * 0.35,
-                height: height * 0.65,
+                height: height * 0.5,
                 child: CachedNetworkImageWidget(
                   borderRadius: BorderRadius.circular(width * .02),
                   image: cartModel.prodImage,
@@ -58,16 +60,21 @@ class CartItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(cartModel.prodTitle!),
+                        TextWidget(
+                            fontWeight: FontWeight.bold,
+                            isSmallText: true,
+                            text: cartModel.prodTitle!),
                         InkWell(
                           onTap: deleteFun,
                           child: Container(
                             width: width * 0.1,
-                            height: height * 0.2,
+                            height: height * 0.15,
                             color: Colors.red,
                             child: Icon(
                               Icons.delete,
-                              size: width * 0.1,
+                              size: SizerUtil.deviceType == DeviceType.mobile
+                                  ? width * 0.1
+                                  : width * 0.07,
                             ),
                           ),
                         ),
@@ -101,7 +108,11 @@ class CartItem extends StatelessWidget {
                     //       Checkbox(value: true, onChanged: (value) {}),
                     // ),
 
-                    Center(child: Text("${cartModel.prodPrice}" + "sar".tr)),
+                    Center(
+                        child: TextWidget(
+                            fontWeight: FontWeight.bold,
+                            isSmallText: true,
+                            text: "${cartModel.prodPrice}" + "sar".tr)),
                     // SizedBox(
                     //   height: height * 0.02,
                     // ),
@@ -110,13 +121,22 @@ class CartItem extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            Text("size".tr),
-                            Text("${cartModel.prodSize!}"),
+                            TextWidget(
+                                fontWeight: FontWeight.bold,
+                                isSmallText: true,
+                                text: "size".tr),
+                            TextWidget(
+                                fontWeight: FontWeight.bold,
+                                isSmallText: true,
+                                text: "${cartModel.prodSize!}"),
                           ],
                         ),
                         Column(
                           children: [
-                            Text("color".tr),
+                            TextWidget(
+                                fontWeight: FontWeight.bold,
+                                isSmallText: true,
+                                text: "color".tr),
                             CircleAvatar(
                               radius: width * 0.03,
                               backgroundColor: HexColor(cartModel.prodColor!),
@@ -184,8 +204,10 @@ class CartItem extends StatelessWidget {
                                       color: Colors.grey[200],
                                       border: Border.all()),
                                   child: Center(
-                                    child: Text(
-                                      cartModel.prodQuantity.toString(),
+                                    child: TextWidget(
+                                      fontWeight: FontWeight.w500,
+                                      isSmallText: true,
+                                      text: cartModel.prodQuantity.toString(),
                                     ),
                                   ),
                                 ),
@@ -235,11 +257,18 @@ class CartItem extends StatelessWidget {
                     SizedBox(
                       height: height * 0.02,
                     ),
-                    Text("tottal".tr),
+                    TextWidget(
+                        fontWeight: FontWeight.bold,
+                        isSmallText: true,
+                        text: "tottal".tr),
                     SizedBox(
                       height: height * 0.02,
                     ),
-                    Text("${productTotalPrice!.toStringAsFixed(2)}" + "sar".tr),
+                    TextWidget(
+                        fontWeight: FontWeight.w500,
+                        isSmallText: true,
+                        text: "${productTotalPrice!.toStringAsFixed(2)}" +
+                            "sar".tr),
                   ],
                 ),
               )

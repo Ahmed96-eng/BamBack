@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qattan/constant.dart';
 import 'package:qattan/veiw/component_widget/icon_button_widget.dart';
 import 'package:qattan/veiw/component_widget/navigator.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 
 class AppBarWidgets extends StatelessWidget {
   final String? title;
@@ -14,10 +15,18 @@ class AppBarWidgets extends StatelessWidget {
     return AppBar(
       elevation: 0,
       centerTitle: true,
-      title: Text(title!),
+      title: Padding(
+        padding: EdgeInsets.only(top: width! * 0.02),
+        child: TextWidget(
+          text: title!,
+          fontWeight: FontWeight.bold,
+          // isLargeText: true,
+          color: buttonTextColor!,
+        ),
+      ),
       leading: (lang == 'en')
           ? Padding(
-              padding: EdgeInsets.all(width! * 0.03),
+              padding: EdgeInsets.all(width! * 0.01),
               child: IconButtonWidget(
                 icon: (lang == 'ar') ? Icons.arrow_forward : Icons.arrow_back,
                 radius: width! * 0.05,
@@ -31,7 +40,7 @@ class AppBarWidgets extends StatelessWidget {
       actions: [
         if ((lang == 'ar'))
           Padding(
-            padding: EdgeInsets.all(width! * 0.03),
+            padding: EdgeInsets.all(width! * 0.01),
             child: IconButtonWidget(
               icon: (lang == 'ar') ? Icons.arrow_forward : Icons.arrow_back,
               radius: width! * 0.05,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:sizer/sizer.dart';
 
 class RatingMethodWidget extends StatelessWidget {
   const RatingMethodWidget({
@@ -13,7 +14,7 @@ class RatingMethodWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RatingBar.builder(
-      itemSize: 15,
+      itemSize: SizerUtil.deviceType == DeviceType.mobile ? 15 : 20,
       initialRating: initialRating!,
       minRating: 1,
       direction: Axis.horizontal,

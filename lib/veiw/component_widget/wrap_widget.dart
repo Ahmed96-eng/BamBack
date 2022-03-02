@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qattan/constant.dart';
+import 'package:qattan/veiw/component_widget/text_widget.dart';
 
 class WrapWidget extends StatelessWidget {
   const WrapWidget({
@@ -30,7 +31,10 @@ class WrapWidget extends StatelessWidget {
         spacing: width * 0.02,
         children: [
           isOrder!
-              ? Text("${constantTitle!} : ")
+              ? TextWidget(
+                  fontWeight: FontWeight.bold,
+                  isSmallText: true,
+                  text: "${constantTitle!} : ")
               : Icon(
                   icon,
                   color: mainColor,
@@ -41,7 +45,8 @@ class WrapWidget extends StatelessWidget {
           //   height: height * 0.04,
           //   width: width * 0.07,
           // ),
-          Text(title!),
+          TextWidget(
+              fontWeight: FontWeight.bold, isSmallText: true, text: title!),
         ],
       ),
     );
